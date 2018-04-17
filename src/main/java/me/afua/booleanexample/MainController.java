@@ -47,15 +47,29 @@ public class MainController {
         }
          @RequestMapping("/update/{id}")
          public String updateBook(@PathVariable ("id") long id, Model model){
-         model.addAttribute("aBook ",bookRepo.findById(id).get());
+         model.addAttribute("aBook",bookRepo.findById(id).get());
        //   Book bBook = new Book();
 
        //  System.out.println(bBook.getTitle()+bBook.getId() );
         return "addbook";
          }
 
+         @RequestMapping("/detail/{id}")
+    public String showBook(@PathVariable ("id") long id, Model model){
+             model.addAttribute("aBook",bookRepo.findById(id).get());
+        //return"addbook";
+             return "redirect:/";
+         }
 
-
+    @RequestMapping("/delete/{id}")
+    public String delBook(@PathVariable ("id") long id, Model model) {
+        model.addAttribute("aBook", bookRepo.findById(id).get());
+       //
+        // return "addbook";
+        Book bBook = bookRepo.findById(id).get();
+        bookRepo.save(bBook);
+        return "redirect:/";
+    }
 
     }
 
