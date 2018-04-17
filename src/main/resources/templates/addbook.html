@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/savebook" th:object="${aBook}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+        <input type="text" th:field="*{title}">
+        <input type="checkbox" th:field="*{borrowed}" th:check="*{borrowed}">
+        <button type="submit">Add a book</button>
+    </form>
+</body>
+</html>
