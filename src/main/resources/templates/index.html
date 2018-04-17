@@ -11,6 +11,9 @@
     <p th:text="${eachBook.borrowed}?'Borrowed':'Available'"></p>
     <a th:text="${eachBook.borrowed}?'Return':'Borrow'" th:href="@{/changestatus/{id}(id=${eachBook.id})}"></a>
 
+    <a th:href="@{/update/{id}(id=${eachBook.id})}">Update</a>
+
+
 </div>
 </body>
 </html>

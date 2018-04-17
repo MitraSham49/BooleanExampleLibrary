@@ -16,7 +16,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String showIndex(Model model) {
-        model.addAttribute("library",bookRepo.findAll());
+        model.addAttribute("library", bookRepo.findAll());
         return "index";
     }
 
@@ -27,12 +27,10 @@ public class MainController {
     }
 
     @RequestMapping("/savebook")
-    public String saveBook(@ModelAttribute("aBook") Book toSave, BindingResult result)
-    {
+    public String saveBook(@ModelAttribute("aBook") Book toSave, BindingResult result) {
 
-        if(result.hasErrors())
-        {
-           return "addbook";
+        if (result.hasErrors()) {
+            return "addbook";
         }
         bookRepo.save(toSave);
         return "redirect:/";
@@ -41,11 +39,25 @@ public class MainController {
     @RequestMapping("/changestatus/{id}")
     public String borrowReturn(@PathVariable("id") long id) {
         Book thisBook = bookRepo.findById(id).get();
-        //Reverse the status
-        thisBook.setBorrowed(!thisBook.isBorrowed());
-        bookRepo.save(thisBook);
-        return "redirect:/";
+        //if (thisBook.isBorrowed())
+            //Reverse the status
+            thisBook.setBorrowed(!thisBook.isBorrowed());
+            bookRepo.save(thisBook);
+            return "redirect:/";
+        }
+         @RequestMapping("/update/{id}")
+         public String updateBook(@PathVariable ("id") long id, Model model){
+         model.addAttribute("aBook ",bookRepo.findById(id).get());
+       //   Book bBook = new Book();
+
+       //  System.out.println(bBook.getTitle()+bBook.getId() );
+        return "addbook";
+         }
+
+
+
+
     }
 
 
-}
+
